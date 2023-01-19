@@ -16,6 +16,7 @@ let puntosJugador = 0,
 
 const btnPedir = document.querySelector('#btnPedir');
 const btnDetener = document.querySelector('#btnDetener');
+const btnNuevo = document.querySelector('#btnNuevo');
 
 const divCartasJugador =  document.querySelector('#jugador-cartas');
 const divCartasComputadora =  document.querySelector('#computadora-cartas');
@@ -97,6 +98,19 @@ const turnoComputadora = ( puntosMinimos ) => {
 
     } while ( (puntosComputadora < puntosMinimos) && ( puntosMinimos <= 21) );
 
+    setTimeout(() => {
+
+    
+    if( puntosComputadora === puntosMinimos ) {
+        alert('Nadie gana :(')
+    } else if ( puntosMinimos > 21 ) {
+        alert('Computadora gana')
+    }else if ( puntosComputadora > 21 ) {
+        alert('Jugador Gana')
+    } else {
+        alert('Computadora Gana')
+    }
+    }, 10 )
 }
 
 
@@ -138,6 +152,25 @@ btnDetener.addEventListener('click', () => {
     btnDetener.disabled = true;
     
     turnoComputadora(puntosJugador);
+});
+
+btnNuevo.addEventListener('click', () => {
+
+    console.clear();
+    
+    deck = [];
+    btnPedir.disabled = false;
+    btnDetener.disabled = false;
+
+    puntosJugador = 0
+    puntosComputadora = 0
+    puntosHTML[0].innerText = puntosJugador;
+    puntosHTML[1].innerText = puntosJugador;
+
+    divCartasComputadora.innerHTML = null
+    divCartasJugador.innerHTML = null
+    
+    crearDeck();
 })
 
 // TODO: Borrar
